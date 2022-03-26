@@ -1,0 +1,23 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Search Results
+{% endblock %}
+
+{% block body %}
+    <h1>Search Results for "{{ search_query }}"</h1>
+
+    <ul>
+        {% for entry in search_results %}
+            <li>
+                <!-- Adding an anchor tag, which links to the entry name. 
+                    Recall that in our urls.py, if we enter wiki/{entry_name}, we execute views.entry and render the page for that wiki entry -->
+                <a href="wiki/{{ entry }}">{{ entry }}</a>
+            </li>
+        <!-- If list of entries is empty -->
+        {% empty %}
+            No matching entries found.
+        {% endfor %}
+    </ul>
+
+{% endblock %}

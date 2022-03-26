@@ -12,8 +12,9 @@
         <div class="row">
             <div class="sidebar col-lg-2 col-md-3">
                 <h2>Wiki</h2>
-                <form>
-                    <input class="search" type="text" name="q" placeholder="Search Encyclopedia">
+                <!-- Submitting our search form will redirect to the /search URL, which will execute views.search as we defined in urls.py -->
+                <form action="/search">
+                    <input class="search form-control" type="text" name="q" placeholder="Search Encyclopedia">
                 </form>
                 <div>
                     <a href="{% url 'index' %}">Home</a>

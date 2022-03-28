@@ -1,3 +1,4 @@
+import random
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -47,3 +48,9 @@ def search(request):
         "search_query": search_query,
         "search_results": search_results
     })
+
+
+# Redirect to a random wiki entry
+def random_entry(request):
+    # Select a random entry from our list of entries, and redirect to that page
+    return HttpResponseRedirect("wiki/{}".format(random.choice(util.list_entries())))

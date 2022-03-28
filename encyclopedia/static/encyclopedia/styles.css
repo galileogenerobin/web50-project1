@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: white;
+    box-sizing: border-box;
 }
 
 code {
@@ -35,4 +36,49 @@ textarea {
 
 .sidebar h2 {
     margin-top: 5px;
+}
+
+.edit-page-title {
+    margin: 24px 8px 0px;
+}
+.edit-page-container {
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    align-items: center;
+}
+.edit-page-field {
+    margin: 8px;
+    height: 36px;
+    padding: 4px;
+    border: 1px solid #ddd;
+    color: #222;
+    border-radius: 4px;
+    width: 100%;
+}
+.edit-page-field:hover, .edit-page-field:focus-visible {
+    outline: none;
+    border: 1px solid rgb(82, 158, 230);
+    transition: all .3s ease-in-out;
+}
+.entry-content {
+    min-height: 70vh;
+}
+.save-button-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+.save-button {
+    margin: 8px 0px 8px 8px;
+    width: 50%;
+    max-width: 30%;
+}
+
+.text-error {
+    font-size: 14px;
+    color: red;
+    text-align: left;
+    width: 100%;
 }

@@ -9,8 +9,8 @@
         <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
     </head>
     <body>
-        <div class="row">
-            <div class="sidebar col-lg-2 col-md-3">
+        <div class="main-container">
+            <div class="sidebar">
                 <h2>Wiki</h2>
                 <!-- Submitting our search form will redirect to the /search URL, which will execute views.search as we defined in urls.py -->
                 <form action="/search">
@@ -20,7 +20,7 @@
                     <a href="{% url 'index' %}">Home</a>
                 </div>
                 <div>
-                    <a href="{% url 'new_entry' %}">Create New Page</a>
+                    <a href="{% url 'update_entry' %}">Create New Page</a>
                 </div>
                 <div>
                     <a href="{% url 'random' %}">Random Page</a>
@@ -28,7 +28,7 @@
                 {% block nav %}
                 {% endblock %}
             </div>
-            <div class="main col-lg-10 col-md-9">
+            <div class="main">
                 {% block body %}
                 {% endblock %}
             </div>

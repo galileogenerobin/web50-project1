@@ -6,7 +6,7 @@ Edit Wiki Entry
 
 {% block body %}
 <h2 class="edit-page-title">Edit Wiki Entry</h2>
-<form action="/save_entry" method="post">
+<form action="/update_entry" method="post">
     <div class="edit-page-container">
         {% csrf_token %}
         <!-- Hidden flag for new entry or editing existing entry -->

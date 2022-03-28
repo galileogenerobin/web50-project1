@@ -54,19 +54,16 @@ def search(request):
     })
 
 
-# Create a new entry page
-def new_entry(request):
-    return render(request, "encyclopedia/new_page.html", {
+# Save an entry given an entry title and entry content; we will use this both for Create New Entry and Edit Entry
+def update_entry(request):
+    if request.method == 'GET':
+        return render(request, "encyclopedia/new_page.html", {
         "entry_title": '',
         "entry_content": '',
         "page_exists": False
-    })
-
-
-# Save an entry given an entry title and entry content; we will use this both for Create New Entry and Edit Entry
-def save_entry(request):
+        })
     # We will only process POST requests
-    if request.method == 'POST':
+    elif request.method == 'POST':
         entry_title = request.POST['title']
         entry_content = request.POST['content']
         is_new_entry = True if request.POST['new-or-edit'] == 'New' else False

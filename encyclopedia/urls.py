@@ -11,9 +11,7 @@ urlpatterns = [
     # Path for random_entry
     path("random", views.random_entry, name="random"),
     # Path for creating a new entry
-    path("new_entry", views.new_entry, name="new_entry"),
-    # Path for saving an entry
-    path("save_entry", views.save_entry, name="save_entry"),
+    path("update_entry", views.update_entry, name="update_entry"),
     # Path for editing an entry
     path("edit_entry", views.edit_entry, name="edit_entry")
 ]

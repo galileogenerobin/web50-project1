@@ -75,6 +75,13 @@ textarea {
     width: 50%;
     max-width: 30%;
 }
+.edit-entry-container {
+    display: flex;
+    justify-content: flex-end;
+}
+.edit-entry-button {
+    margin: 0px 16px;
+}
 
 .text-error {
     font-size: 14px;

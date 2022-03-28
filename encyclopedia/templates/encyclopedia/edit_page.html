@@ -1,22 +1,18 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-Create New Wiki Entry
+Edit Wiki Entry
 {% endblock %}
 
 {% block body %}
-<h2 class="edit-page-title">Create a New Wiki Entry</h2>
+<h2 class="edit-page-title">Edit Wiki Entry</h2>
 <form action="/save_entry" method="post">
     <div class="edit-page-container">
         {% csrf_token %}
         <!-- Hidden flag for new entry or editing existing entry -->
-        <input type="hidden" name="new-or-edit" value="New">
+        <input type="hidden" name="new-or-edit" value="Edit">
         <!-- Entry title -->
         <input class="edit-page-field entry-title" type="text" placeholder="Entry title" name="title" value="{{ entry_title }}">
-        {% if page_exists %}
-        <!-- We show this line of text is there is already an existing page for that title -->
-        <div class="text-error">Sorry, that page already exists</div>
-        {% endif %}
         <!-- Textarea for Markdown -->
         <textarea class="edit-page-field entry-content" type="text" placeholder="Markdown text for entry content" name="content">{{ entry_content }}</textarea>
         <!-- Save button -->

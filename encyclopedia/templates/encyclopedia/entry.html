@@ -5,5 +5,12 @@
 {% endblock %}
 
 {% block body %}
+<form action="/edit_entry" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="title" value="{{ entry_title }}">
+    <div class="edit-entry-container">
+        <button class="btn edit-entry-button btn-outline-dark" type="submit">Edit Wiki</button>
+    </div>
+</form>
 {{ entry_content | safe}}
 {% endblock %}

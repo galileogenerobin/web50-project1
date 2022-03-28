@@ -69,21 +69,46 @@ def save_entry(request):
     if request.method == 'POST':
         entry_title = request.POST['title']
         entry_content = request.POST['content']
+        is_new_entry = True if request.POST['new-or-edit'] == 'New' else False
 
-        # Check all existing entries
-        for entry in util.list_entries():
-            # Check if an existing entry already exists with the same title. If so, present an error message but retain the user's input
-            if entry.lower() == entry_title.lower():
-                return render(request, "encyclopedia/new_page.html", {
-                    "entry_title": entry_title,
-                    "entry_content": entry_content,
-                    "page_exists": True
-                })
+        # Check flag if new entry or editing existing entry
+        if is_new_entry:
+            # Check all existing entries
+            for entry in util.list_entries():
+                # Check if an existing entry already exists with the same title. If so, present an error message but retain the user's input
+                if entry.lower() == entry_title.lower():
+                    return render(request, "encyclopedia/new_page.html", {
+                        "entry_title": entry_title,
+                        "entry_content": entry_content,
+                        "page_exists": True
+                    })
+                    # We stop here and don't save any changes
 
-        # Otherwise, save the entry and redirect to the home page (using the Post-Redirect-Get Pattern to avoid repeating the request via F5 / Refresh)
+        # Otherwise, save the entry (i.e. editing existing entry, or creating new entry without a duplicate)
         util.save_entry(entry_title, entry_content)
-        # Redirect to the home page
-        return redirect('index')
+        
+        # We use the Post-Redirect-Get Pattern to avoid repeating the request via F5 / Refresh
+        # If new entry, redirect to the home page
+        if is_new_entry: return redirect('index')
+        # Otherwise, if editing existing entry, redirect to the entry page
+        return redirect('wiki/{}'.format(entry_title))
+
+
+# Edit and existing entry
+def edit_entry(request):
+    # We will only process POST requests (to avoid handling manual URL get requests)
+    if request.method == 'POST':
+        entry_title = request.POST['title']
+        # Check if there is an existing entry
+        entry_content = util.get_entry(entry_title)
+        if entry_content is not None:
+            return render(request, 'encyclopedia/edit_page.html', {
+                'entry_title': entry_title,
+                'entry_content': entry_content
+            })
+  
+    # Otherwise (i.e. GET method, or invalid entry title), render the error page
+    return render(request, 'encyclopedia/error.html')
 
 
 # Redirect to a random wiki entry

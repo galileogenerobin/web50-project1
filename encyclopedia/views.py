@@ -2,6 +2,7 @@ import random
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
+import markdown2
 
 from . import util
 
@@ -19,6 +20,9 @@ def entry(request, entry_title):
 
     # If there is a valid entry
     if entry_content is not None:
+        # Convert to HTML using markdown2
+        entry_content = markdown2.markdown(entry_content)
+        
         return render(request, "encyclopedia/entry.html", {
             "entry_title": entry_title,
             "entry_content": entry_content
